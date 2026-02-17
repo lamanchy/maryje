@@ -7,8 +7,8 @@ services:
     image: wordpress:latest
     user: root
     volumes:
-      - ${HOST_HOME}/maryje/wp-content:/var/www/html/wp-content
-    command: chown -R www-data:www-data /var/www/html/wp-content
+      - ${HOST_HOME}/maryje/wordpress:/var/www/html
+    command: chown -R www-data:www-data /var/www/html
 
   wordpress:
     container_name: maryje_wordpress
@@ -21,8 +21,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_CONFIG_EXTRA: "define('FS_METHOD', 'direct');"
     volumes:
-      - wordpress:/var/www/html
-      - ${HOST_HOME}/maryje/wp-content:/var/www/html/wp-content
+      - ${HOST_HOME}/maryje/wordpress:/var/www/html
     expose:
       - 80
     networks:
@@ -46,6 +45,4 @@ services:
     volumes:
       - ${HOST_HOME}/maryje/db:/var/lib/mysql
 
-volumes:
-  wordpress:
 
