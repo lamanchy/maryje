@@ -1,3 +1,7 @@
+networks:
+  maryje_network:
+    external: true
+
 services:
   wordpress:
     container_name: maryje_wordpress
@@ -12,6 +16,9 @@ services:
       - ${HOST_HOME}/maryje/wordpress:/var/www/html
     expose:
       - 80
+    networks:
+      - maryje_network
+      - default
     depends_on:
       - db
 
