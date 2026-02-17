@@ -26,3 +26,4 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ${HOST_HOME}/maryje/db:/var/lib/mysql
+
