@@ -1,0 +1,28 @@
+services:
+  wordpress:
+    container_name: maryje_wordpress
+    image: wordpress:latest
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: maryje_db
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - ${HOST_HOME}/maryje/wordpress:/var/www/html
+    expose:
+      - 80
+    depends_on:
+      - db
+
+  db:
+    container_name: maryje_db
+    image: mariadb:lts
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${HOST_HOME}/maryje/db:/var/lib/mysql
